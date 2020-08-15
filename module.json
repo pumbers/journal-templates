@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "minimumCoreVersion": "0.6.5",
   "compatibleCoreVersion": "0.6.5",
-  "author": "3rdDog <paul.umbers@gmail.com>",
+  "author": "3rdDog",
   "esmodules": ["dist/main.js"],
   "url": "https://github.com/pumbers/journal-templates",
   "manifest": "https://raw.githubusercontent.com/pumbers/journal-templates/master/module.json",
