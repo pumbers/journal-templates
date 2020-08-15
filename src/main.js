@@ -33,6 +33,7 @@ import * as yamlFront from "yaml-front-matter";
                 };
               } catch (err) {
                 console.error("Journal Templates | Error parsing", file, "-", err);
+                ui.notifications.warn(`Unable to load Journal Template ${file}: ${err}`);
               }
             });
           });
