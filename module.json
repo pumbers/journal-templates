@@ -1,0 +1,13 @@
+{
+  "name": "journal-templates",
+  "title": "Journal Templates",
+  "description": "Lets you define your own journal entry templates.",
+  "version": "1.0",
+  "minimumCoreVersion": "0.6.4",
+  "compatibleCoreVersion": "0.6.4",
+  "author": "Paul Umbers",
+  "esmodules": ["./main.js"],
+  "url": "",
+  "manifest": "",
+  "download": ""
+}

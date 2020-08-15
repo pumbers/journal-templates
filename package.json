@@ -1,0 +1,10 @@
+{
+  "name": "journal-templates",
+  "version": "1.0.0",
+  "main": "main.js",
+  "author": "Paul Umbers",
+  "license": "MIT",
+  "dependencies": {
+    "yaml-front-matter": "^4.1.0"
+  }
+}
