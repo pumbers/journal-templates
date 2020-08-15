@@ -4,10 +4,16 @@
   "main": "main.js",
   "author": "Paul Umbers",
   "license": "MIT",
+  "scripts": {
+    "build": "npx webpack",
+    "dev": "npx webpack --watch"
+  },
   "dependencies": {
     "yaml-front-matter": "^4.1.0"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^6.0.3"
+    "clean-webpack-plugin": "^3.0.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   }
 }
