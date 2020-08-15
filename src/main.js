@@ -6,9 +6,12 @@ import * as yamlFront from "yaml-front-matter";
   Hooks.once("init", () => {
     console.log("Journal Templates | Initializing");
 
-    CONFIG.TinyMCE.plugins += " template";
-    CONFIG.TinyMCE.toolbar = CONFIG.TinyMCE.toolbar.replace(/save/, "template save");
+    // if template plugin or toolbar button not already loaded, load them
+    if (!CONFIG.TinyMCE.plugins.includes("template")) CONFIG.TinyMCE.plugins += " template";
+    if (!CONFIG.TinyMCE.toolbar.includes("template"))
+      CONFIG.TinyMCE.toolbar = CONFIG.TinyMCE.toolbar.replace(/save/, "template save");
 
+    // Fetch the templates from the server
     FilePicker.browse("user", `modules/journal-templates/templates`)
       .then((resp) => {
         // For each template file
@@ -46,7 +49,10 @@ import * as yamlFront from "yaml-front-matter";
           .then((loaded) => loaded.filter((l) => l))
           // Send the remaining to the Foundry function patch
           .then((templates) => {
-            console.log("Journal Templates | Loaded", templates.map((t) => t.title).join(","));
+            console.log(
+              "Journal Templates | Loaded",
+              templates.map((t) => t.title)
+            );
             // Patch over the original Foundry _createEditor function for the JournalSheet class
             (function (_createEditor) {
               // Cache the original method
