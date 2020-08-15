@@ -1,13 +1,13 @@
 {
   "name": "journal-templates",
   "title": "Journal Templates",
-  "description": "Lets you define your own journal entry templates.",
-  "version": "1.0",
-  "minimumCoreVersion": "0.6.4",
-  "compatibleCoreVersion": "0.6.4",
-  "author": "Paul Umbers",
+  "description": "Define your own Journal Entry templates.",
+  "version": "0.1.0",
+  "minimumCoreVersion": "0.6.5",
+  "compatibleCoreVersion": "0.6.5",
+  "author": "3rdDog <paul.umbers@gmail.com>",
   "esmodules": ["dist/main.js"],
-  "url": "",
+  "url": "https://github.com/pumbers/journal-templates",
   "manifest": "",
   "download": ""
 }

@@ -11,18 +11,26 @@ import * as yamlFront from "yaml-front-matter";
 
     FilePicker.browse("user", `modules/journal-templates/templates`)
       .then((resp) => {
-        // console.log("files", resp.files);
+        // For each template file
         return resp.files.map((file) => {
-          // console.log("loading", file);
+          // Fetch the file contents
           return fetch(file).then((response) => {
-            // console.log("...response", response);
+            // Get the body text
             return response.text().then((fileContents) => {
-              // console.log("...fileContents", fileContents);
+              // Parse the template to retrieve the YAML front matter
               try {
                 let parsed = yamlFront.loadFront(fileContents);
                 if (!parsed.title) throw "No template title";
+                if (!parsed.description) throw "No template description";
+                // Run the template through Handlebars
+                let rendered = Handlebars.compile(parsed.__content)(parsed);
                 console.log("Journal Templates | Loaded", file);
-                return { title: parsed.title, description: parsed.description, content: parsed.__content };
+                // Return the rendered template
+                return {
+                  title: parsed.title,
+                  description: parsed.description,
+                  content: rendered,
+                };
               } catch (err) {
                 console.error("Journal Templates | Error parsing", file, "-", err);
               }
@@ -31,20 +39,24 @@ import * as yamlFront from "yaml-front-matter";
         });
       })
       .then((loading) => {
-        Promise.all(loading).then((templates) => {
-          // console.log("Journal Templates | Loaded", templates);
-          // Patch over the original Foundry _createEditor function for the JournalSheet class
-          (function (_createEditor) {
-            // Cache the original method
-            JournalSheet.prototype._createEditor = function () {
-              // console.log("JournalSheet._createEditor()", arguments, templates);
-              // Add the loaded templates to the editor template list (filtering out nulls because they didn't load)
-              arguments[1] = Object.assign(arguments[1], { templates: templates.filter((t) => t) });
-              // Now, call the original method
-              return _createEditor.apply(this, arguments);
-            };
-          })(JournalSheet.prototype._createEditor);
-        });
+        // Wait for all templates to load
+        Promise.all(loading)
+          // Filter out any that failed and returned null
+          .then((loaded) => loaded.filter((l) => l))
+          // Send the remaining to the Foundry function patch
+          .then((templates) => {
+            console.log("Journal Templates | Loaded", templates.map((t) => t.title).join(","));
+            // Patch over the original Foundry _createEditor function for the JournalSheet class
+            (function (_createEditor) {
+              // Cache the original method
+              JournalSheet.prototype._createEditor = function () {
+                // Add the loaded templates to the editor template list (filtering out nulls because they didn't load)
+                arguments[1] = Object.assign(arguments[1], { templates });
+                // Now, call the original method
+                return _createEditor.apply(this, arguments);
+              };
+            })(JournalSheet.prototype._createEditor);
+          });
       });
   });
 })();
