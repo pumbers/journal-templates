@@ -12,9 +12,9 @@ import * as yamlFront from "yaml-front-matter";
     (function (_createEditor) {
       // Cache the original method
       JournalSheet.prototype._createEditor = function () {
-        console.log("JournalSheet._createEditor()", arguments);
+        console.log("JournalSheet._createEditor()", arguments, path.normalize("./templates"));
         // Extra function logic here
-        let additionalOptions = {
+        let options = {
           templates: [
             {
               title: "Test Template",
@@ -23,7 +23,7 @@ import * as yamlFront from "yaml-front-matter";
             },
           ],
         };
-        arguments[1] = { ...arguments[1], ...additionalOptions };
+        arguments[1] = Object.assign(arguments[1], options);
         // Now, call the original method
         return _createEditor.apply(this, arguments);
       };

@@ -6,7 +6,7 @@
   "minimumCoreVersion": "0.6.4",
   "compatibleCoreVersion": "0.6.4",
   "author": "Paul Umbers",
-  "esmodules": ["./main.js"],
+  "esmodules": ["dist/main.js"],
   "url": "",
   "manifest": "",
   "download": ""
