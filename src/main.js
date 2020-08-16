@@ -26,7 +26,7 @@ import * as yamlFront from "yaml-front-matter";
                 if (!parsed.title) throw "No template title";
                 if (!parsed.description) throw "No template description";
                 // Run the template through Handlebars
-                let rendered = Handlebars.compile(parsed.__content)(parsed);
+                let rendered = file.endsWith("hbs") ? Handlebars.compile(parsed.__content)(parsed) : parsed.__content;
                 console.log("Journal Templates | Loaded", file);
                 // Return the rendered template
                 return {
@@ -57,7 +57,7 @@ import * as yamlFront from "yaml-front-matter";
             (function (_createEditor) {
               // Cache the original method
               JournalSheet.prototype._createEditor = function () {
-                // Add the loaded templates to the editor template list (filtering out nulls because they didn't load)
+                // Add the loaded templates to the editor template list
                 arguments[1] = Object.assign(arguments[1], { templates });
                 // Now, call the original method
                 return _createEditor.apply(this, arguments);
