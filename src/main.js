@@ -23,8 +23,8 @@ import * as yamlFront from "yaml-front-matter";
               // Parse the template to retrieve the YAML front matter
               try {
                 let parsed = yamlFront.loadFront(fileContents);
-                if (!parsed.title) throw "No template title";
-                if (!parsed.description) throw "No template description";
+                if (!parsed.title) throw game.i18n.translations.JOURNAL_TEMPLATES.errorNoTitle;
+                if (!parsed.description) throw game.i18n.translations.JOURNAL_TEMPLATES.errorNoDescription;
                 // Run the template through Handlebars
                 let rendered = file.endsWith("hbs") ? Handlebars.compile(parsed.__content)(parsed) : parsed.__content;
                 console.log("Journal Templates | Loaded", file);
@@ -36,7 +36,7 @@ import * as yamlFront from "yaml-front-matter";
                 };
               } catch (err) {
                 console.error("Journal Templates | Error parsing", file, "-", err);
-                ui.notifications.warn(`Unable to load Journal Template ${file}: ${err}`);
+                ui.notifications.warn(game.i18n.format("JOURNAL_TEMPLATES.errorLoading", { file, err }));
               }
             });
           });
@@ -53,6 +53,7 @@ import * as yamlFront from "yaml-front-matter";
               "Journal Templates | Loaded",
               templates.map((t) => t.title)
             );
+            ui.notifications.info(game.i18n.format("JOURNAL_TEMPLATES.loaded", { count: templates.length }));
             // Patch over the original Foundry _createEditor function for the JournalSheet class
             (function (_createEditor) {
               // Cache the original method
