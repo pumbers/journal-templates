@@ -2,7 +2,7 @@
 
 Create your own library of Journal Entry templates for any game system in Foundry VTT.
 
-This module can be added to any game system or world. When the world starts, it will load templates from the `journal-templates` folder within the world and make them available to the TinyMCE Editor used to write journal entries. If, for some reason, templates are not loading correctly, check the browser console for more detailed error messages.
+This module can be added to any game system or world. When the world starts, it will load templates from the `journal-templates` folder within the world and make them available to the TinyMCE Editor used to write journal entries. If, for some reason, templates are not loading correctly, a warning message will be displayed - check the browser console for more detailed error messages.
 
 The `templates` icon is added to the editor toolbar.
 
@@ -51,8 +51,8 @@ description: Some template to generate text from
 
 The front matter **must** contain `title` and `description` fields, they’re used to describe the template as it’s being chosen. It can optionally contain any other field.
 
-Template files ending in `.html` will be rendered as-is, template files ending in `.hbs` will be rendered using Handlebars and any fields from the front matter can be included in the body of the template using ``{{field_name}}``.
+Template files ending in `.html` will be rendered as-is, template files ending in `.hbs` will be rendered using Handlebars and any fields from the front matter can be included in the body of the template using `{{field_name}}`. For example: if a template contains `{{title}}` then the title field from the front matter is inserted.
 
-For example: if a template contains ``{{title}}`` then the title field from the front matter is inserted.
+The easiest way to create a template is to build it as a journal entry in Foundry VTT, then click the _show code_ `< >` button on the toolbar and copy the HTML code for the entry, then paste it into a template file. Don’t forget to add the `title` and `description` front matter. But, if you feel up to writing your own HTML, go for it - just make sure it works with the editor before you use it in a game.
 
-The easiest way to create a template is to build it as a journal entry in Foundry VTT, then click the *show code* ``< >`` button on the toolbar and copy the HTML code for the entry, then paste it into a template file. Don’t forget to add the ``title`` and ``description`` front matter. But, if you feel up to writing your own HTML, go for it - just make sure it works with the editor before you use it in a game.
+Templates can be entire journal pages (as shown above), or just small reusable page snippets.
