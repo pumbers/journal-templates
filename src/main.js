@@ -1,9 +1,7 @@
 import * as yamlFront from "yaml-front-matter";
 
 (function () {
-  console.log("Journal Templates | Loading");
-
-  Hooks.once("init", () => {
+  Hooks.once("ready", () => {
     console.log("Journal Templates | Initializing");
 
     // if template plugin or toolbar button not already loaded, load them

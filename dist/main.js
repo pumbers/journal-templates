@@ -13264,8 +13264,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 (function () {
-  console.log("Journal Templates | Loading");
-  Hooks.once("init", function () {
+  Hooks.once("ready", function () {
     console.log("Journal Templates | Initializing"); // if template plugin or toolbar button not already loaded, load them
 
     if (!CONFIG.TinyMCE.plugins.includes("template")) CONFIG.TinyMCE.plugins += " template";
