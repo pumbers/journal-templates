@@ -12,7 +12,7 @@ Click on the stamp icon and select a template.
 
 ![](screen_shot_template.png)
 
-A template is a text file with some YAML FrontMatter followed by the HTML template itself:
+A template is a text file with some [YAML](https://www.w3schools.io/file/yaml-introduction/) FrontMatter followed by the HTML template itself:
 
 ```
 ---
@@ -49,7 +49,7 @@ description: Some template to generate text from
 </table>
 ```
 
-The front matter **must** contain a `title` and `description` fields. It can optionally contain any other field.
+The front matter **must** contain `title` and `description` fields, they’re used to describe the template before as it’s being chosen. It can optionally contain any other field.
 
 Template files ending in `.html` will be rendered as-is, template files ending in `.hbs` will be rendered using Handlebars and any fields from the front matter can be included in the body of the template using ``{{field_name}}``.
 
