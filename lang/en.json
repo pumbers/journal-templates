@@ -1,6 +1,6 @@
 {
   "JOURNAL_TEMPLATES": {
-    "loaded": "Journal Templates: Loaded {count} templates.",
+    "loaded": "Journal Templates: Loaded {count} template(s).",
     "errorNoTitle": "No template title in frontmatter",
     "errorNoDescription": "No template description in frontmatter",
     "errorLoading": "Unable to load Journal Template {file}: {err}"

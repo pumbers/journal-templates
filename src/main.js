@@ -12,10 +12,16 @@ import * as yamlFront from "yaml-front-matter";
       CONFIG.TinyMCE.toolbar = CONFIG.TinyMCE.toolbar.replace(/save/, "template save");
 
     // Fetch the templates from the server
-    FilePicker.browse("user", `modules/journal-templates/templates`)
+    let location = `worlds/${game.data.world.name}/journal-templates`;
+    console.log(`Journal Templates | Loading from ${location}`);
+    FilePicker.browse("user", location)
       .then((resp) => {
+        if (resp?.target !== location) {
+          console.log(`Journal Templates | No template folder found at ${location}`);
+          return [];
+        }
         // For each template file
-        return resp.files.map((file) => {
+        return resp.files?.map((file) => {
           // Fetch the file contents
           return fetch(file).then((response) => {
             // Get the body text
@@ -43,6 +49,8 @@ import * as yamlFront from "yaml-front-matter";
         });
       })
       .then((loading) => {
+        // No file found at template location, so skip the following
+        if (!loading?.length) return;
         // Wait for all templates to load
         Promise.all(loading)
           // Filter out any that failed and returned null
@@ -65,6 +73,9 @@ import * as yamlFront from "yaml-front-matter";
               };
             })(JournalSheet.prototype._createEditor);
           });
+      })
+      .catch((err) => {
+        console.log("error", err);
       });
   });
 })();

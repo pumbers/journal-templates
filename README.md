@@ -2,7 +2,7 @@
 
 Create your own library of Journal Entry templates for any game system in Foundry VTT.
 
-This module can be added to any game system or world. When the world starts, it will load templates from the `templates` folder within the module and make them available to the TinyMCE Editor used to write journal entries.
+This module can be added to any game system or world. When the world starts, it will load templates from the `journal-templates` folder within the world and make them available to the TinyMCE Editor used to write journal entries. If, for some reason, templates are not loading correctly, check the browser console for more detailed error messages.
 
 The `templates` icon is added to the editor toolbar.
 
