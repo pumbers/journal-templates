@@ -51,6 +51,8 @@ description: Some template to generate text from
 
 The front matter **must** contain a `title` and `description` fields. It can optionally contain any other field.
 
-When the template is loaded it is rendered using Handlebars, and any fields from the front matter can be included in the body of the template using ``{{field_name}}``.
+Template files ending in `.html` will be rendered as-is, template files ending in `.hbs` will be rendered using Handlebars and any fields from the front matter can be included in the body of the template using ``{{field_name}}``.
 
 For example: if a template contains ``{{title}}`` then the title field from the front matter is inserted.
+
+The easiest way to create a template is to build it as a journal entry in Foundry VTT, then click the *show code* ``< >`` button on the toolbar and copy the HTML code for the entry, then paste it into a template file. Don’t forget to add the ``title`` and ``description`` front matter. But, if you feel up to writing your own HTML, go for it - just make sure it works with the editor before you use it in a game.
