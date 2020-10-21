@@ -2,20 +2,20 @@
   "name": "journal-templates",
   "title": "Journal Templates",
   "description": "Speed up your journal entries by defining your own Journal Entry templates.",
-  "version": "0.2.0",
-  "minimumCoreVersion": "0.6.0",
-  "compatibleCoreVersion": "0.6.5",
+  "version": "0.3.0",
+  "minimumCoreVersion": "0.7.4",
+  "compatibleCoreVersion": "0.7.4",
   "author": "3rdDog",
   "languages": [
     {
       "lang": "en",
       "name": "English",
-      "path": "./lang/en.json"
+      "path": "lang/en.json"
     }
   ],
   "esmodules": ["dist/main.js"],
   "url": "https://github.com/pumbers/journal-templates",
   "manifest": "https://raw.githubusercontent.com/pumbers/journal-templates/master/module.json",
-  "download": "https://github.com/pumbers/journal-templates/archive/v0.2.0.zip",
+  "download": "https://github.com/pumbers/journal-templates/archive/v0.3.0.zip",
   "license": "MIT"
 }

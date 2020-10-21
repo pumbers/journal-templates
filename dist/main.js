@@ -13326,19 +13326,19 @@ __webpack_require__.r(__webpack_exports__);
         }));
         ui.notifications.info(game.i18n.format("JOURNAL_TEMPLATES.loaded", {
           count: templates.length
-        })); // Patch over the original Foundry _createEditor function for the JournalSheet class
+        })); // Patch over the original Foundry activateEditor function for the JournalSheet class
 
-        (function (_createEditor) {
+        (function (activateEditor) {
           // Cache the original method
-          JournalSheet.prototype._createEditor = function () {
+          JournalSheet.prototype.activateEditor = function () {
             // Add the loaded templates to the editor template list
             arguments[1] = Object.assign(arguments[1], {
               templates: templates
             }); // Now, call the original method
 
-            return _createEditor.apply(this, arguments);
+            return activateEditor.apply(this, arguments);
           };
-        })(JournalSheet.prototype._createEditor);
+        })(JournalSheet.prototype.activateEditor);
       });
     })["catch"](function (err) {
       console.log("error", err);

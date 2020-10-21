@@ -60,16 +60,16 @@ import * as yamlFront from "yaml-front-matter";
               templates.map((t) => t.title)
             );
             ui.notifications.info(game.i18n.format("JOURNAL_TEMPLATES.loaded", { count: templates.length }));
-            // Patch over the original Foundry _createEditor function for the JournalSheet class
-            (function (_createEditor) {
+            // Patch over the original Foundry activateEditor function for the JournalSheet class
+            (function (activateEditor) {
               // Cache the original method
-              JournalSheet.prototype._createEditor = function () {
+              JournalSheet.prototype.activateEditor = function () {
                 // Add the loaded templates to the editor template list
                 arguments[1] = Object.assign(arguments[1], { templates });
                 // Now, call the original method
-                return _createEditor.apply(this, arguments);
+                return activateEditor.apply(this, arguments);
               };
-            })(JournalSheet.prototype._createEditor);
+            })(JournalSheet.prototype.activateEditor);
           });
       })
       .catch((err) => {
