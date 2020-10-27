@@ -3,8 +3,8 @@
   "title": "Journal Templates",
   "description": "Speed up your journal entries by defining your own Journal Entry templates.",
   "version": "0.3.0",
-  "minimumCoreVersion": "0.7.4",
-  "compatibleCoreVersion": "0.7.4",
+  "minimumCoreVersion": "0.7.5",
+  "compatibleCoreVersion": "0.7.5",
   "author": "3rdDog",
   "languages": [
     {
