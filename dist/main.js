@@ -13330,13 +13330,14 @@ __webpack_require__.r(__webpack_exports__);
 
         (function (activateEditor) {
           // Cache the original method
-          JournalSheet.prototype.activateEditor = function () {
-            // Add the loaded templates to the editor template list
-            arguments[1] = Object.assign(arguments[1], {
+          JournalSheet.prototype.activateEditor = function (name) {
+            var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+            var initialContent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
+            // Now, call the original method with templates added
+            console.log("Journal Templates | Opening Journal Editor,", (templates === null || templates === void 0 ? void 0 : templates.length) || 0, "template(s) ready");
+            return activateEditor.apply(this, [name, Object.assign(options, {
               templates: templates
-            }); // Now, call the original method
-
-            return activateEditor.apply(this, arguments);
+            }), initialContent]);
           };
         })(JournalSheet.prototype.activateEditor);
       });

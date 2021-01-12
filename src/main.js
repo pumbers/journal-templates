@@ -63,11 +63,10 @@ import * as yamlFront from "yaml-front-matter";
             // Patch over the original Foundry activateEditor function for the JournalSheet class
             (function (activateEditor) {
               // Cache the original method
-              JournalSheet.prototype.activateEditor = function () {
-                // Add the loaded templates to the editor template list
-                arguments[1] = Object.assign(arguments[1], { templates });
-                // Now, call the original method
-                return activateEditor.apply(this, arguments);
+              JournalSheet.prototype.activateEditor = function (name, options = {}, initialContent = "") {
+                // Now, call the original method with templates added
+                console.log("Journal Templates | Opening Journal Editor,", templates?.length || 0, "template(s) ready");
+                return activateEditor.apply(this, [name, Object.assign(options, { templates }), initialContent]);
               };
             })(JournalSheet.prototype.activateEditor);
           });
