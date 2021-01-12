@@ -13264,13 +13264,36 @@ __webpack_require__.r(__webpack_exports__);
 
 
 (function () {
+  /* -------------------------------------------- */
+
+  /*  Module Settings                            
+  /* -------------------------------------------- */
+  Hooks.once("init", function () {
+    console.log("Journal Templates | Initializing");
+    game.settings.register("journal-templates", "templateLocation", {
+      name: "Where are your templates stored?",
+      hint: "Templates can be stored anywhere within the Foundry VTT Data folder, the default is journal-templates within your current world folder.",
+      scope: "world",
+      config: true,
+      type: String,
+      "default": "worlds/".concat(game.data.world.name, "/journal-templates"),
+      onChange: function onChange(choice) {
+        window.location.reload();
+      }
+    });
+  });
+  /* -------------------------------------------- */
+
+  /*  Ready Hook & Editor Overrides                          
+  /* -------------------------------------------- */
+
   Hooks.once("ready", function () {
-    console.log("Journal Templates | Initializing"); // if template plugin or toolbar button not already loaded, load them
+    console.log("Journal Templates | Ready"); // if template plugin or toolbar button not already loaded, load them
 
     if (!CONFIG.TinyMCE.plugins.includes("template")) CONFIG.TinyMCE.plugins += " template";
     if (!CONFIG.TinyMCE.toolbar.includes("template")) CONFIG.TinyMCE.toolbar = CONFIG.TinyMCE.toolbar.replace(/save/, "template save"); // Fetch the templates from the server
 
-    var location = "worlds/".concat(game.data.world.name, "/journal-templates");
+    var location = game.settings.get("journal-templates", "templateLocation");
     console.log("Journal Templates | Loading from ".concat(location));
     FilePicker.browse("user", location).then(function (resp) {
       var _resp$files;

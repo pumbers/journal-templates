@@ -1,8 +1,31 @@
 import * as yamlFront from "yaml-front-matter";
 
 (function () {
-  Hooks.once("ready", () => {
+  /* -------------------------------------------- */
+  /*  Module Settings                            
+  /* -------------------------------------------- */
+  Hooks.once("init", () => {
     console.log("Journal Templates | Initializing");
+
+    game.settings.register("journal-templates", "templateLocation", {
+      name: "Where are your templates stored?",
+      hint:
+        "Templates can be stored anywhere within the Foundry VTT Data folder, the default is journal-templates within your current world folder.",
+      scope: "world",
+      config: true,
+      type: String,
+      default: `worlds/${game.data.world.name}/journal-templates`,
+      onChange: (choice) => {
+        window.location.reload();
+      },
+    });
+  });
+
+  /* -------------------------------------------- */
+  /*  Ready Hook & Editor Overrides                          
+  /* -------------------------------------------- */
+  Hooks.once("ready", () => {
+    console.log("Journal Templates | Ready");
 
     // if template plugin or toolbar button not already loaded, load them
     if (!CONFIG.TinyMCE.plugins.includes("template")) CONFIG.TinyMCE.plugins += " template";
@@ -10,7 +33,7 @@ import * as yamlFront from "yaml-front-matter";
       CONFIG.TinyMCE.toolbar = CONFIG.TinyMCE.toolbar.replace(/save/, "template save");
 
     // Fetch the templates from the server
-    let location = `worlds/${game.data.world.name}/journal-templates`;
+    let location = game.settings.get("journal-templates", "templateLocation");
     console.log(`Journal Templates | Loading from ${location}`);
     FilePicker.browse("user", location)
       .then((resp) => {
